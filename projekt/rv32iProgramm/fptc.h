@@ -1,5 +1,6 @@
 #ifndef _FPTC_H_
 #define _FPTC_H_
+#include <stdio.h>
 
 /*
  * fptc.h is a 32-bit or 64-bit fixed point numeric library (modified by mgetka)
@@ -80,12 +81,6 @@
 
 #include <stdint.h>
 
-// Bare-Metal compatibility: Define ssize_t if not available
-#ifndef _SSIZE_T_DEFINED
-#define _SSIZE_T_DEFINED
-typedef int ssize_t;
-#endif
-
 #if FPT_BITS == 32
 typedef int32_t fpt;
 typedef int64_t  fptd;
@@ -100,25 +95,23 @@ typedef __uint128_t fptud;
 #error "FPT_BITS must be equal to 32 or 64"
 #endif
 
-/* vor allem an einer Stelle früh im Header */
-#ifndef FPT_FBITS
-#define FPT_FBITS 17
-#endif
-
-/* dann (falls nötig) überschreibe FPT_WBITS entsprechend */
 #ifndef FPT_WBITS
-#define FPT_WBITS (FPT_BITS - FPT_FBITS)
+#define FPT_WBITS  15
 #endif
 
+#if FPT_WBITS >= FPT_BITS
+#error "FPT_WBITS must be less than or equal to FPT_BITS"
+#endif
 
 #define FPT_VCSID "$Id$"
 
+#define FPT_FBITS  (FPT_BITS - FPT_WBITS)
 #define FPT_FMASK  (((fpt)1 << FPT_FBITS) - 1)
 
 #define fl2fpt(R) ((fpt)((R) * FPT_ONE + ((R) >= 0 ? 0.5 : -0.5)))
 #define i2fpt(I) ((fptd)(I) << FPT_FBITS)
 #define fpt2i(F) ((F) >> FPT_FBITS)
-
+#define raw2fpt(X) ((fpt)(X))
 #define i2fpt_norm(I,n) (               \
     (FPT_FBITS - n) >= 0 ?              \
       ((fptd)(I) << (FPT_FBITS - n)) :  \
@@ -285,31 +278,7 @@ _pow(int x, unsigned int y) {
   return ret;
 }
 
-// Bare-metal compatible simple string to integer parser
-static inline int 
-_simple_str_to_int(const char *str, int *result, int *len) {
-    int val = 0;
-    int i = 0;
-    int sign = 1;
-    
-    if (str[i] == '-') {
-        sign = -1;
-        i++;
-    } else if (str[i] == '+') {
-        i++;
-    }
-    
-    while (str[i] >= '0' && str[i] <= '9') {
-        val = val * 10 + (str[i] - '0');
-        i++;
-    }
-    
-    *result = val * sign;
-    *len = i;
-    return (i > 0) ? 1 : 0;
-}
-
-/* Parse string to fpt. Scientific format is not supported. Simplified for bare-metal. */
+/* Parse string to fpt. Scientific format is not supported. */
 static inline int
 fpt_scan(const char * s, fpt * num, int * br) {
   
@@ -330,17 +299,17 @@ fpt_scan(const char * s, fpt * num, int * br) {
     }
     
     if (*(s+i) >= '0' && *(s+i) <= '9') {
-      if (_simple_str_to_int(s+i, &whole, &bytesread) > 0)
+      if (sscanf(s+i, "%d%n", &whole, &bytesread) > 0)
         ret = 1;
       i += bytesread;
     }
     
     if (*(s+i) == '.' && *(s+i+1) >= '0' && *(s+i+1) <= '9') {
       
-      if (_simple_str_to_int(s+i+1, &decimal, &expo) > 0)
+     if (sscanf(s+i+1, "%d%n", &decimal, &expo) > 0)
         ret = 1;
       i += expo;
-    }
+    } 
     
   } while (*(s+(++i)) != 0 && !ret);
   
@@ -367,7 +336,7 @@ fpt_scan(const char * s, fpt * num, int * br) {
  * be returned, meaning there will be invalid, bogus digits outside the
  * specified precisions.
  */
-static inline ssize_t
+static inline int
 fpt_str(fpt A, char *str, int max_dec)
 {
   int ndec = 0, slen = 0;
@@ -381,7 +350,7 @@ fpt_str(fpt A, char *str, int max_dec)
 #if FPT_WBITS > 16
     max_dec = 2;
 #else
-    max_dec = 4;
+    max_dec = 6;
 #endif
 #elif FPT_BITS == 64
     max_dec = 10;
@@ -407,21 +376,17 @@ fpt_str(fpt A, char *str, int max_dec)
   str[slen++] = '.';
 
   fr = (fpt_fracpart(A) << FPT_WBITS) & mask;
-
-  // Rundung vorbereiten
-fpt rounding = fl2fpt(0.5 / _pow(10, max_dec)); 
-fr += rounding; // einfach im Fixed-Point addieren
-
-  // Schreibe exakt max_dec Nachkommastellen, auch wenn fr zwischendurch 0 wird
-  for (ndec = 0; ndec < max_dec; ndec++) {
+  do {
     fr = (fr & mask) * 10;
+
     str[slen++] = '0' + (fr >> FPT_BITS) % 10;
-  }
+    ndec++;
+  } while (fr != 0 && ndec < max_dec);
 
   str[slen] = '\0';
 
   
-  return (ssize_t) slen;
+  return slen;
 }
 
 /* Converts the given fixedpt number into a string, using a static
@@ -622,9 +587,3 @@ fpt_pow(fpt n, fpt exp)
 }
 
 #endif
-// Konvertiert eine int32_t-Rohzahl im Q15.17 Format zu fpt
-#define raw2fpt(X) ((fpt)(X))
-
-static inline fpt int_to_fpt(int32_t x) {
-    return x << FPT_FBITS;
-}
