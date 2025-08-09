@@ -2,7 +2,7 @@ ENTRY(_start)
 MEMORY
 {
     iram (rx) : ORIGIN = 0x80000000, LENGTH = 0x7000
-    dram (rw): ORIGIN = 0x00000000, LENGTH = 0xFFF
+    dram (rw): ORIGIN = 0x00000000, LENGTH = 0xFFFF
 }
 SECTIONS
 {
