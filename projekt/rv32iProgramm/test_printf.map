@@ -65,67 +65,67 @@ LOAD /usr/local/riscv/lib64/gcc/riscv32-unknown-elf/10.2.0/libgcc.a
  .init          0x0000000080000000       0x20 start.o
                 0x0000000080000000                _start
 
-.text           0x0000000080000020     0x5ec4
+.text           0x0000000080000020     0x5ec0
  *(.text*)
- .text          0x0000000080000020      0x4c4 main.o
-                0x0000000080000020                fpt_atan_poly_5th
+ .text          0x0000000080000020      0x4c0 main.o
+                0x0000000080000020                helper
                 0x0000000080000188                fpt_atan2
- .text.startup  0x00000000800004e4      0x200 main.o
-                0x00000000800004e4                main
- .text          0x00000000800006e4        0x0 start.o
- .text          0x00000000800006e4     0x1d94 printf.o
-                0x00000000800022bc                _putchar
-                0x00000000800022e0                printf_
-                0x0000000080002334                sprintf_
-                0x0000000080002384                snprintf_
-                0x00000000800023d0                vprintf_
-                0x0000000080002400                vsnprintf_
-                0x000000008000241c                fctprintf
- .text          0x0000000080002478      0x628 /usr/local/riscv/lib64/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(_divdi3.o)
-                0x0000000080002478                __divdi3
- .text          0x0000000080002aa0      0x540 /usr/local/riscv/lib64/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(_moddi3.o)
-                0x0000000080002aa0                __moddi3
- .text          0x0000000080002fe0      0x5d0 /usr/local/riscv/lib64/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(_udivdi3.o)
-                0x0000000080002fe0                __udivdi3
- .text          0x00000000800035b0      0x4e8 /usr/local/riscv/lib64/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(_umoddi3.o)
-                0x00000000800035b0                __umoddi3
- .text          0x0000000080003a98      0x7d8 /usr/local/riscv/lib64/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(adddf3.o)
-                0x0000000080003a98                __adddf3
- .text          0x0000000080004270      0x7dc /usr/local/riscv/lib64/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(divdf3.o)
-                0x0000000080004270                __divdf3
- .text          0x0000000080004a4c       0x8c /usr/local/riscv/lib64/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(eqdf2.o)
-                0x0000000080004a4c                __eqdf2
-                0x0000000080004a4c                __nedf2
- .text          0x0000000080004ad8       0xe4 /usr/local/riscv/lib64/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(gedf2.o)
-                0x0000000080004ad8                __gtdf2
-                0x0000000080004ad8                __gedf2
- .text          0x0000000080004bbc       0xe4 /usr/local/riscv/lib64/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(ledf2.o)
-                0x0000000080004bbc                __ltdf2
-                0x0000000080004bbc                __ledf2
- .text          0x0000000080004ca0      0x684 /usr/local/riscv/lib64/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(muldf3.o)
-                0x0000000080004ca0                __muldf3
- .text          0x0000000080005324      0x7ec /usr/local/riscv/lib64/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(subdf3.o)
-                0x0000000080005324                __subdf3
- .text          0x0000000080005b10       0x80 /usr/local/riscv/lib64/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(fixdfsi.o)
-                0x0000000080005b10                __fixdfsi
- .text          0x0000000080005b90       0x7c /usr/local/riscv/lib64/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(fixunsdfsi.o)
-                0x0000000080005b90                __fixunsdfsi
- .text          0x0000000080005c0c       0xa8 /usr/local/riscv/lib64/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(floatsidf.o)
-                0x0000000080005c0c                __floatsidf
- .text          0x0000000080005cb4       0x80 /usr/local/riscv/lib64/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(floatunsidf.o)
-                0x0000000080005cb4                __floatunsidf
- .text          0x0000000080005d34       0x24 /usr/local/riscv/lib64/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(muldi3.o)
-                0x0000000080005d34                __mulsi3
- .text          0x0000000080005d58       0x90 /usr/local/riscv/lib64/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(multi3.o)
-                0x0000000080005d58                __muldi3
- .text          0x0000000080005de8       0xb4 /usr/local/riscv/lib64/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(div.o)
-                0x0000000080005de8                __divsi3
-                0x0000000080005df0                __udivsi3
-                0x0000000080005e38                __umodsi3
-                0x0000000080005e6c                __modsi3
- .text          0x0000000080005e9c        0x0 /usr/local/riscv/lib64/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(_clz.o)
- .text          0x0000000080005e9c       0x48 /usr/local/riscv/lib64/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(_clzsi2.o)
-                0x0000000080005e9c                __clzsi2
+ .text.startup  0x00000000800004e0      0x200 main.o
+                0x00000000800004e0                main
+ .text          0x00000000800006e0        0x0 start.o
+ .text          0x00000000800006e0     0x1d94 printf.o
+                0x00000000800022b8                _putchar
+                0x00000000800022dc                printf_
+                0x0000000080002330                sprintf_
+                0x0000000080002380                snprintf_
+                0x00000000800023cc                vprintf_
+                0x00000000800023fc                vsnprintf_
+                0x0000000080002418                fctprintf
+ .text          0x0000000080002474      0x628 /usr/local/riscv/lib64/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(_divdi3.o)
+                0x0000000080002474                __divdi3
+ .text          0x0000000080002a9c      0x540 /usr/local/riscv/lib64/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(_moddi3.o)
+                0x0000000080002a9c                __moddi3
+ .text          0x0000000080002fdc      0x5d0 /usr/local/riscv/lib64/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(_udivdi3.o)
+                0x0000000080002fdc                __udivdi3
+ .text          0x00000000800035ac      0x4e8 /usr/local/riscv/lib64/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(_umoddi3.o)
+                0x00000000800035ac                __umoddi3
+ .text          0x0000000080003a94      0x7d8 /usr/local/riscv/lib64/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(adddf3.o)
+                0x0000000080003a94                __adddf3
+ .text          0x000000008000426c      0x7dc /usr/local/riscv/lib64/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(divdf3.o)
+                0x000000008000426c                __divdf3
+ .text          0x0000000080004a48       0x8c /usr/local/riscv/lib64/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(eqdf2.o)
+                0x0000000080004a48                __eqdf2
+                0x0000000080004a48                __nedf2
+ .text          0x0000000080004ad4       0xe4 /usr/local/riscv/lib64/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(gedf2.o)
+                0x0000000080004ad4                __gtdf2
+                0x0000000080004ad4                __gedf2
+ .text          0x0000000080004bb8       0xe4 /usr/local/riscv/lib64/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(ledf2.o)
+                0x0000000080004bb8                __ltdf2
+                0x0000000080004bb8                __ledf2
+ .text          0x0000000080004c9c      0x684 /usr/local/riscv/lib64/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(muldf3.o)
+                0x0000000080004c9c                __muldf3
+ .text          0x0000000080005320      0x7ec /usr/local/riscv/lib64/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(subdf3.o)
+                0x0000000080005320                __subdf3
+ .text          0x0000000080005b0c       0x80 /usr/local/riscv/lib64/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(fixdfsi.o)
+                0x0000000080005b0c                __fixdfsi
+ .text          0x0000000080005b8c       0x7c /usr/local/riscv/lib64/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(fixunsdfsi.o)
+                0x0000000080005b8c                __fixunsdfsi
+ .text          0x0000000080005c08       0xa8 /usr/local/riscv/lib64/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(floatsidf.o)
+                0x0000000080005c08                __floatsidf
+ .text          0x0000000080005cb0       0x80 /usr/local/riscv/lib64/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(floatunsidf.o)
+                0x0000000080005cb0                __floatunsidf
+ .text          0x0000000080005d30       0x24 /usr/local/riscv/lib64/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(muldi3.o)
+                0x0000000080005d30                __mulsi3
+ .text          0x0000000080005d54       0x90 /usr/local/riscv/lib64/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(multi3.o)
+                0x0000000080005d54                __muldi3
+ .text          0x0000000080005de4       0xb4 /usr/local/riscv/lib64/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(div.o)
+                0x0000000080005de4                __divsi3
+                0x0000000080005dec                __udivsi3
+                0x0000000080005e34                __umodsi3
+                0x0000000080005e68                __modsi3
+ .text          0x0000000080005e98        0x0 /usr/local/riscv/lib64/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(_clz.o)
+ .text          0x0000000080005e98       0x48 /usr/local/riscv/lib64/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(_clzsi2.o)
+                0x0000000080005e98                __clzsi2
 
 .rodata         0x0000000000000000      0x808
  *(.rodata*)
